@@ -1,5 +1,5 @@
 <?php
-namespace Macademy\Trainee\Api;
+namespace Macademy\Trainee\Api\Data;
 
 interface PrueRepositoryInterface
 {

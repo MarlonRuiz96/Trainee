@@ -1,20 +1,21 @@
 <?php
 namespace Macademy\Trainee\Model;
 
-use Macademy\Trainee\Api\Data\PrueRepositoryInterface;
-use Macademy\Trainee\Model\ResourceModel\Prueba\CollectionFactory;
+use Macademy\Trainee\Api\Data\ReviewsInterface;
+use Macademy\Trainee\Model\ResourceModel\Reviews\CollectionFactory;
 
-class PrueRepository implements PrueRepositoryInterface
+class ReviewsRepository implements ReviewsInterface
 {
+
     private $collectionFactory;
 
     public function __construct(
-        CollectionFactory $collectionFactory
-    ) {
+        CollectionFactory $collectionFactory,
+    ){
         $this->collectionFactory = $collectionFactory;
     }
 
-    public function getList()
+    public function getReviews()
     {
         $collection = $this->collectionFactory->create();
 
@@ -25,4 +26,5 @@ class PrueRepository implements PrueRepositoryInterface
 
         return $items;
     }
+
 }
