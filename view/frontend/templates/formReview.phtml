@@ -1,0 +1,30 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Macademy\Trainee\ViewModel\ReviewForm $FormReviewsViewModel */
+$FormReviewsViewModel = $block->getViewModel();
+?>
+
+<form action="<?= $block->getUrl('reviews/index/save') ?>" method="post">
+    <?php if ($FormReviewsViewModel->isLoggedIn()): ?>
+        <!-- Ocultar los campos de nombre y correo si el usuario está logueado -->
+        <input type="hidden" name="customer_name" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?>" />
+        <input type="hidden" name="customer_email" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerEmail()) ?>" />
+        <p>Bienvenido, <?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?></p>
+    <?php else: ?>
+        <!-- Mostrar campos de nombre y correo si el usuario no está logueado -->
+        <label for="customer_name">Nombre:</label>
+        <input type="text" name="customer_name" placeholder="Ingresa tu nombre" required />
+
+        <label for="customer_email">Correo electrónico:</label>
+        <input type="email" name="customer_email" placeholder="Ingresa tu correo electrónico" required />
+    <?php endif; ?>
+
+    <!-- Campos comunes -->
+    <label for="rating">Calificación (1-5):</label>
+    <input type="number" name="rating" min="1" max="5" required />
+
+    <label for="review">Opinión:</label>
+    <textarea name="review" placeholder="Escribe tu opinión" required></textarea>
+
+    <button type="submit">Enviar Opinión</button>
+</form>

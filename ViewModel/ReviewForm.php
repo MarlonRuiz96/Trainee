@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Macademy\Trainee\ViewModel;
@@ -6,22 +7,20 @@ namespace Macademy\Trainee\ViewModel;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
-class ReviewMessage implements ArgumentInterface
+class ReviewForm implements ArgumentInterface
 {
     /**
      * @var CustomerSession
      */
+
     private $customerSession;
 
-    public function __construct(
-        CustomerSession $customerSession
-    ) {
+    public function __construct(CustomerSession $customerSession)
+    {
         $this->customerSession = $customerSession;
     }
-
     /**
-     * Verifica si el cliente está logueado
-     *
+     * Verificar si el cliente esta logueado
      * @return bool
      */
     public function isLoggedIn(): bool
@@ -30,32 +29,32 @@ class ReviewMessage implements ArgumentInterface
     }
 
     /**
-     * Obtiene el nombre completo del cliente
-     *
+     * Obtener el nombre del cliente
      * @return string|null
      */
+
     public function getCustomerName(): ?string
     {
-        if ($this->isLoggedIn()) {
-            $customer = $this->customerSession->getCustomer();
-            return $customer->getFirstname() . ' ' . $customer->getLastname();
+        if ($this->isLoggedIn()){
+            $customer= $this->customerSession->getCustomer();
+            return $customer->getFirstname(). ' ' . $customer->getLastname();
         }
-
         return null;
     }
 
     /**
-     * Obtiene el correo electrónico del cliente
+     * Obtemer el correo del cliente
      *
      * @return string|null
+     *
      */
+
     public function getCustomerEmail(): ?string
     {
         if ($this->isLoggedIn()) {
             $customer = $this->customerSession->getCustomer();
             return $customer->getEmail();
         }
-
         return null;
     }
 }
