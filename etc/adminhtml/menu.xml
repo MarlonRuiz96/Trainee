@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/menu.xsd">
+    <menu>
+        <add id="Macademy_Trainee::main_menu"
+             title="Opiniones"
+             module="Macademy_Trainee"
+             sortOrder="100"
+             action="reviews/review/index"
+             resource="Macademy_Trainee::main_menu"/>
+
+        <!-- Submenú: Ver todas las opiniones -->
+        <add id="Macademy_Trainee::view_reviews"
+             title="Ver Opiniones"
+             module="Macademy_Trainee"
+             sortOrder="10"
+             action="reviews/review/manage"
+             parent="Macademy_Trainee::main_menu"
+             resource="Macademy_Trainee::view_reviews"/>
+
+        <!-- Submenú: Opiniones por aprobar -->
+        <add id="Macademy_Trainee::pending_reviews"
+             title="Opiniones por Aprobar"
+             module="Macademy_Trainee"
+             sortOrder="20"
+             action="reviews/review/pending"
+             parent="Macademy_Trainee::main_menu"
+             resource="Macademy_Trainee::pending_reviews"/>
+
+    </menu>
+</config>
+
