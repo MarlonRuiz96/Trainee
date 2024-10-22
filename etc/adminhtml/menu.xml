@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+    <menu>
+        <!-- Menú Principal -->
+        <add id="Macademy_Trainee::manager"
+             title="Grid Manager"
+             module="Macademy_Trainee"
+             sortOrder="10"
+             resource="Macademy_Trainee::manager"/>
+
+        <!-- Submenú: Add Row -->
+        <add id="Macademy_Trainee::add_row"
+             title="Add Review"
+             module="Macademy_Trainee"
+             sortOrder="20"
+             parent="Macademy_Trainee::manager"
+             action="grid/grid"
+             resource="Macademy_Trainee::add_row"/>
+    </menu>
+</config>

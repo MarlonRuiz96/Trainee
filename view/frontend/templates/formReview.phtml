@@ -4,7 +4,7 @@
 $FormReviewsViewModel = $block->getViewModel();
 ?>
 
-<form action="<?= $block->getUrl('reviews/index/save') ?>" method="post">
+<form class="form-review" action="<?= $block->getUrl('reviews/index/save') ?>" method="post">
     <?php if ($FormReviewsViewModel->isLoggedIn()): ?>
         <!-- Ocultar los campos de nombre y correo si el usuario está logueado -->
         <input type="hidden" name="customer_name" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?>" />
