@@ -90,7 +90,7 @@ class Grid extends AbstractModel implements GridInterface
      * @param string $customerEmail
      * @return $this
      */
-    public function setCostumerEmail($customerEmail)
+    public function setCustomerEmail($customerEmail)
     {
         return $this->setData(self::CUSTOMER_EMAIL, $customerEmail);
     }
@@ -121,7 +121,7 @@ class Grid extends AbstractModel implements GridInterface
      *
      * @return string|null
      */
-    public function GetReview()
+    public function getReview()
     {
         return $this->getData(self::REVIEW);
     }

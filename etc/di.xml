@@ -4,7 +4,8 @@
 
     <!-- Preferencia para GridInterface -->
     <preference for="Macademy\Trainee\Api\Data\GridInterface" type="Macademy\Trainee\Model\Grid" />
-    <preference for="Macademy\Trainee\Api\ReviewsInterface" type="Macademy\Trainee\Model\ReviewsRepository"/>
+    <preference for="Macademy\Trainee\Api\ReviewRepositoryInterface" type="Macademy\Trainee\Model\ReviewRepository"/>
+
 
     <!-- Configuración del VirtualType para el backend -->
     <virtualType name="Macademy\Trainee\Model\ResourceModel\Grid\Grid\Collection"
@@ -25,5 +26,6 @@
             </argument>
         </arguments>
     </type>
+
 
 </config>

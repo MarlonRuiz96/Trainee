@@ -2,29 +2,108 @@
 /** @var \Magento\Framework\View\Element\Template $block */
 /** @var \Macademy\Trainee\ViewModel\ReviewForm $FormReviewsViewModel */
 $FormReviewsViewModel = $block->getViewModel();
+$reviews = $FormReviewsViewModel->getApprovedReviews();
+
+// Lista de imágenes disponibles
+$images = [
+    "https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png",
+    "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/boy_male_avatar_portrait-256.png",
+    "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/ufo_alien_space_avatar-256.png",
+    "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-256.png",
+    "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/sloth_lazybones_sluggard_avatar-256.png",
+    "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/sheep_mutton_animal_avatar-256.png"
+];
+
+$counter = 0; // Inicializa el contador para iterar sobre las imágenes
 ?>
 
-<form class="form-review" action="<?= $block->getUrl('reviews/index/save') ?>" method="post">
-    <?php if ($FormReviewsViewModel->isLoggedIn()): ?>
-        <!-- Ocultar los campos de nombre y correo si el usuario está logueado -->
-        <input type="hidden" name="customer_name" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?>" />
-        <input type="hidden" name="customer_email" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerEmail()) ?>" />
-        <p>Bienvenido, <?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?></p>
-    <?php else: ?>
-        <!-- Mostrar campos de nombre y correo si el usuario no está logueado -->
-        <label for="customer_name">Nombre:</label>
-        <input type="text" name="customer_name" placeholder="Ingresa tu nombre" required />
+<!-- Mostrar las opiniones -->
+<div class="reviews-list">
+    <h1 style="display: inline-block;">Opiniones de nuestros clientes</h1>
+    <button id="toggle-form-button"
+            style="margin-left: 20px; padding: 10px; font-size: 16px; cursor: pointer;">
+        ¡Deja tu Opinión!
+    </button>
+    <section id="testimonials" style="display: block; margin-top: 20px;">
+        <div class="testimonial-box-container">
+            <?php foreach ($reviews as $review): ?>
+                <?php
+                // Seleccionar una imagen usando el contador
+                $imageIndex = $counter % count($images);
+                $imageSrc = $images[$imageIndex];
+                $counter++; // Incrementa el contador en cada iteración
+                ?>
 
-        <label for="customer_email">Correo electrónico:</label>
-        <input type="email" name="customer_email" placeholder="Ingresa tu correo electrónico" required />
-    <?php endif; ?>
+                <div class="testimonial-box">
+                    <div class="box-top">
+                        <div class="profile">
+                            <div class="profile-img">
+                                <img src="<?= $imageSrc ?>" alt="Profile Image" />
+                            </div>
+                            <div class="name-user">
+                                <strong><?= $block->escapeHtml($review['customer_name']) ?></strong>
+                                <span><?= $block->escapeHtml($review['customer_email']) ?></span>
+                                <div class="review-stars"
+                                     data-stars="<?= $block->escapeHtml($review['rating']) ?>"
+                                     title="<?= $block->escapeHtml($review['rating']) ?> stars">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-top" style="text-align: right;">
+                            <!-- Mostrar la fecha de creación -->
+                            <?= date('d/m/Y', strtotime($review['created_at'])) ?>
+                        </div>
+                    </div>
+                    <div class="client-comment">
+                        <p><?= $block->escapeHtml($review['review']) ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+</div>
+<!-- Formulario para dejar una nueva opinión (Oculto al inicio) -->
+<div class="review-form-section" style="display: none;">
+    <h2>Deja tu Opinión</h2>
+    <form class="form-review" action="<?= $block->getUrl('reviews/index/save') ?>" method="post">
+        <?php if ($FormReviewsViewModel->isLoggedIn()): ?>
+            <input type="hidden" name="customer_name" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?>" />
+            <input type="hidden" name="customer_email" value="<?= $block->escapeHtml($FormReviewsViewModel->getCustomerEmail()) ?>" />
+            <p>Bienvenido, <?= $block->escapeHtml($FormReviewsViewModel->getCustomerName()) ?></p>
+        <?php else: ?>
+            <label for="customer_name">Nombre:</label>
+            <input type="text" name="customer_name" placeholder="Ingresa tu nombre" required />
 
-    <!-- Campos comunes -->
-    <label for="rating">Calificación (1-5):</label>
-    <input type="number" name="rating" min="1" max="5" required />
+            <label for="customer_email">Correo electrónico:</label>
+            <input type="email" name="customer_email" placeholder="Ingresa tu correo electrónico" required />
+        <?php endif; ?>
 
-    <label for="review">Opinión:</label>
-    <textarea name="review" placeholder="Escribe tu opinión" required></textarea>
+        <!-- Sistema de Estrellas -->
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5" title="5 estrellas">★</label>
 
-    <button type="submit">Enviar Opinión</button>
-</form>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4" title="4 estrellas">★</label>
+
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3" title="3 estrellas">★</label>
+
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2" title="2 estrellas">★</label>
+
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1" title="1 estrella">★</label>
+        </div>
+
+        <!-- Campo de Opinión -->
+        <label for="review">Opinión:</label>
+        <textarea name="review" placeholder="Escribe tu opinión" required></textarea>
+
+        <!-- Botón de Submit -->
+        <button type="submit">Enviar Opinión</button>
+    </form>
+</div>
+
+
+</div>

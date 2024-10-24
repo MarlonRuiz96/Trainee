@@ -58,7 +58,7 @@ interface GridInterface
     /**
      * Set Content.
      */
-    public function setCostumerEmail($customerEmail);
+    public function setCustomerEmail($customerEmail);
 
     /**
      * Get Publish Date.
@@ -77,7 +77,7 @@ interface GridInterface
      *
      * @return varchar
      */
-    public function GetReview();
+    public function getReview();
 
     /**
      * Set StartingPrice.

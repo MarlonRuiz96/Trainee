@@ -3,6 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="Macademy_Trainee::css/source/_module.less"/>
+        <script src="Macademy_Trainee::js/toggleForm.js"/>
     </head>
     <body>
         <referenceContainer name="content">

@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi/etc/webapi.xsd">
-    <route url="/V1/rewiews" method="GET">
-        <service class="Macademy\Trainee\Api\Data\ReviewsInterface" method="getReviews"/>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/reviews" method="GET">
+        <service class="Macademy\Trainee\Api\ReviewRepositoryInterface" method="getAll"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Macademy_Trainee::review"/>
         </resources>
     </route>
 </routes>

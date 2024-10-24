@@ -5,7 +5,7 @@
     <menu>
         <!-- Menú Principal -->
         <add id="Macademy_Trainee::manager"
-             title="Grid Manager"
+             title="Reviews Manager"
              module="Macademy_Trainee"
              sortOrder="10"
              resource="Macademy_Trainee::manager"/>
